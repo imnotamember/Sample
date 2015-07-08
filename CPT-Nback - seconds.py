@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy2 Experiment Builder (v1.82.01), July 07, 2015, at 21:56
+This experiment was created using PsychoPy2 Experiment Builder (v1.82.00), May 26, 2015, at 12:54
 If you publish work using this script please cite the relevant PsychoPy publications
   Peirce, JW (2007) PsychoPy - Psychophysics software in Python. Journal of Neuroscience Methods, 162(1-2), 8-13.
   Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy. Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
@@ -20,15 +20,15 @@ _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = 'Rosvold CPT N-Back'  # from the Builder filename that created this script
-expInfo = {u'Gender': u'female', u'Handedness': u'Right', u'participant': u'SKY100'}
+expName = u'Biomarker Imaging Study'  # from the Builder filename that created this script
+expInfo = {u'Gender': u'female', u'Handedness': u'Right', u'participant': u'SKY100', u'Trigger Pulse Button': u'*',u'Response Pad Button':u'1'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False: core.quit()  # user pressed cancel
 expInfo['date'] = data.getDateStr()  # add a simple timestamp
 expInfo['expName'] = expName
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + 'data/%s_%s_%s' %(expInfo['participant'], expName, expInfo['date'])
+filename = _thisDir + os.sep + '%s/%s_%s_%s' %(expInfo['participant'], expInfo['participant'], expName, expInfo['date'])
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
@@ -45,8 +45,8 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 # Start Code - component code to be run before the window creation
 
 # Setup the Window
-win = visual.Window(size=(1920, 1080), fullscr=True, screen=0, allowGUI=False, allowStencil=False,
-    monitor='testMonitor', color=[-1.,-1.,-1.], colorSpace='rgb',
+win = visual.Window(size=(1600, 900), fullscr=True, screen=0, allowGUI=False, allowStencil=False,
+    monitor=u'testMonitor', color=[-1.,-1.,-1.], colorSpace='rgb',
     blendMode='avg', useFBO=True,
     )
 # store frame rate of monitor if we can measure it successfully
@@ -73,13 +73,14 @@ Total time to record MRI sequence:
 ###################SETTINGS######################
 ###################SETTINGS######################
 #should be 600 (1320 frames = 22 seconds @ 60Hz refresh rate)
-instrStopTime = 15.995
+instrStopTime = 960
 #should be 600 (1800 frames = 30 seconds @ 60Hz refresh rate)
-instrStopTime2 = 15.995
+instrStopTime2 = 960
 #set this to whatever button is recorded on a trigger pulse,
 # wrapped in apostrophes and seperated by commas for multiple
 # buttons( e.g.: '6','^')
-triggerButton = 'num_multiply', '8', '*'
+triggerButton = expInfo[u'Trigger Pulse Button']
+responseButton = expInfo[u'Response Pad Button']
 data_path = _thisDir + os.sep + '%s' %(expInfo['participant'])
 try:
     os.makedirs(data_path)
@@ -141,7 +142,7 @@ def n_backer():
               #determine if next letter will be new or a nBack match, currently 50/50 odds
               if bias < 50:
                  currentLetter = oldLets[position-nBack]
-                 corAns = '1'
+                 corAns = responseButton
                  counter += 1
               else:
                  corAns = 'none'
@@ -248,7 +249,7 @@ def createButtonLists(alist):
     abuttonlist = []
     for i in alist:
         if i is 'X':
-            abuttonlist.append('1')
+            abuttonlist.append(responseButton)
         else:
             abuttonlist.append('none')
     return abuttonlist
@@ -275,9 +276,9 @@ Warning = visual.TextStim(win=win, ori=0, name='Warning',
 # Initialize components for Routine "MRI_sync"
 MRI_syncClock = core.Clock()
 Waiting_For_Pulse = visual.TextStim(win=win, ori=0, name='Waiting_For_Pulse',
-    text=u'Waiting for trigger pulse...',    font=u'Arial',
+    text='Waiting for trigger pulse...',    font='Arial',
     pos=[0, 0], height=0.1, wrapWidth=None,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=0.0)
 
 # Initialize components for Routine "Welcome_CPT_X"
@@ -293,17 +294,17 @@ grating = visual.GratingStim(win=win, name='grating',units='norm',
     color=[-0.5,0.,0.], colorSpace='rgb', opacity=1,
     texRes=512, interpolate=True, depth=-1.0)
 Instructions_CPT_X = visual.TextStim(win=win, ori=0, name='Instructions_CPT_X',
-    text='default text',    font=u'Arial',
+    text='default text',    font='Arial',
     pos=[0, 0], height=0.1, wrapWidth=None,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=-2.0)
 
 # Initialize components for Routine "CPT_X"
 CPT_XClock = core.Clock()
 Letter_CPT_X = visual.TextStim(win=win, ori=0, name='Letter_CPT_X',
-    text='default text',    font=u'Arial',
+    text='default text',    font='Arial',
     pos=[0, 0], height=0.5, wrapWidth=None,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=0.0)
 CPT_X_responseList = []
 CPT_X_correctList = []
@@ -318,17 +319,17 @@ grating_2 = visual.GratingStim(win=win, name='grating_2',units='norm',
     color=[-1,0,-.5], colorSpace='rgb', opacity=1,
     texRes=128, interpolate=True, depth=0.0)
 Instructions_CPT_AX = visual.TextStim(win=win, ori=0, name='Instructions_CPT_AX',
-    text='default text',    font=u'Arial',
+    text='default text',    font='Arial',
     pos=[0, 0], height=0.1, wrapWidth=None,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=-1.0)
 
 # Initialize components for Routine "CPT_AX"
 CPT_AXClock = core.Clock()
 Letter_CPT_AX = visual.TextStim(win=win, ori=0, name='Letter_CPT_AX',
-    text='default text',    font=u'Arial',
+    text='default text',    font='Arial',
     pos=[0, 0], height=.5, wrapWidth=None,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=0.0)
 CPT_AX_responseList = []
 CPT_AX_responseToAList = []
@@ -348,17 +349,17 @@ Nback_Instructions = visual.ImageStim(win=win, name='Nback_Instructions',
 # Initialize components for Routine "Nback_Fixation"
 Nback_FixationClock = core.Clock()
 Fixation_Nback = visual.TextStim(win=win, ori=0, name='Fixation_Nback',
-    text=u'+',    font=u'Arial',
+    text='+',    font='Arial',
     pos=[0, 0], height=0.1, wrapWidth=None,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=0.0)
 
 # Initialize components for Routine "Nback_Stimulus"
 Nback_StimulusClock = core.Clock()
 Letter_Nback = visual.TextStim(win=win, ori=0, name='Letter_Nback',
-    text='default text',    font=u'Arial',
+    text='default text',    font='Arial',
     pos=[0, 0], height=.5, wrapWidth=None,
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=0.0)
 Nback_responseList = []
 Nback_correctList = []
@@ -405,13 +406,12 @@ while continueRoutine and routineTimer.getTime() > 0:
         Welcome.tStart = t  # underestimates by a little under one frame
         Welcome.frameNStart = frameN  # exact frame index
         Welcome.setAutoDraw(True)
-    if Welcome.status == STARTED and t >= (5-win.monitorFramePeriod*0.75): #most of one frame period left
+    if Welcome.status == STARTED and t >= (0.0 + (5-win.monitorFramePeriod*0.75)): #most of one frame period left
         Welcome.setAutoDraw(False)
     
     
     # check if all components have finished
     if not continueRoutine:  # a component has requested a forced-end of Routine
-        routineTimer.reset()  # if we abort early the non-slip timer needs reset
         break
     continueRoutine = False  # will revert to True if at least one component still running
     for thisComponent in StartComponents:
@@ -460,12 +460,11 @@ while continueRoutine and routineTimer.getTime() > 0:
         Warning.tStart = t  # underestimates by a little under one frame
         Warning.frameNStart = frameN  # exact frame index
         Warning.setAutoDraw(True)
-    if Warning.status == STARTED and t >= (5-win.monitorFramePeriod*0.75): #most of one frame period left
+    if Warning.status == STARTED and t >= (0.0 + (5-win.monitorFramePeriod*0.75)): #most of one frame period left
         Warning.setAutoDraw(False)
     
     # check if all components have finished
     if not continueRoutine:  # a component has requested a forced-end of Routine
-        routineTimer.reset()  # if we abort early the non-slip timer needs reset
         break
     continueRoutine = False  # will revert to True if at least one component still running
     for thisComponent in AreYouSureComponents:
@@ -549,7 +548,6 @@ while continueRoutine:
     
     # check if all components have finished
     if not continueRoutine:  # a component has requested a forced-end of Routine
-        routineTimer.reset()  # if we abort early the non-slip timer needs reset
         break
     continueRoutine = False  # will revert to True if at least one component still running
     for thisComponent in MRI_syncComponents:
@@ -564,8 +562,6 @@ while continueRoutine:
     # refresh the screen
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
-    else:  # this Routine was not non-slip safe so reset non-slip timer
-        routineTimer.reset()
 
 #-------Ending Routine "MRI_sync"-------
 for thisComponent in MRI_syncComponents:
@@ -579,6 +575,8 @@ thisExp.addData('Pulse_Next_Slide.keys',Pulse_Next_Slide.keys)
 if Pulse_Next_Slide.keys != None:  # we had a response
     thisExp.addData('Pulse_Next_Slide.rt', Pulse_Next_Slide.rt)
 thisExp.nextEntry()
+# the Routine "MRI_sync" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
 epoch = data.TrialHandler(nReps=4, method='sequential', 
@@ -605,8 +603,8 @@ for thisEpoch in epoch:
     frameN = -1
     # update component parameters for each repeat
     if epoch_counter == 0:
-        instr_duration = 21.995
-        instr_duration2 = 29.995
+        instr_duration = 1320
+        instr_duration2 = 1800
         splicer1 = epoch_counter
         splicer2 = splicer1 + 2
         instruction_image = 'N-back Instructions.jpg'
@@ -617,7 +615,7 @@ for thisEpoch in epoch:
         splicer2 = splicer1 + 2
         instruction_image = 'N-back Instructions short.jpg'
     
-    instr_duration_s = str(int(instr_duration-2))
+    instr_duration_s = str(int((instr_duration-120)/ 60))
     
     num_of_stim = stim_selection['round%s' % (epoch_counter + 1)]
     nback_num_of_stim = nback_stim_selection['round%s' % (epoch_counter + 1)]
@@ -644,25 +642,25 @@ for thisEpoch in epoch:
         
         
         # *grating* updates
-        if t >= 0 and grating.status == NOT_STARTED:
+        if frameN >= 0 and grating.status == NOT_STARTED:
             # keep track of start time/frame for later
             grating.tStart = t  # underestimates by a little under one frame
             grating.frameNStart = frameN  # exact frame index
             grating.setAutoDraw(True)
-        if grating.status == STARTED and t >= (0 + (instr_duration-2-win.monitorFramePeriod*0.75)): #most of one frame period left
+        if grating.status == STARTED and frameN >= instr_duration-120:
             grating.setAutoDraw(False)
         
         # *Instructions_CPT_X* updates
-        if t >= 0 and Instructions_CPT_X.status == NOT_STARTED:
+        if frameN >= 0 and Instructions_CPT_X.status == NOT_STARTED:
             # keep track of start time/frame for later
             Instructions_CPT_X.tStart = t  # underestimates by a little under one frame
             Instructions_CPT_X.frameNStart = frameN  # exact frame index
             Instructions_CPT_X.setAutoDraw(True)
-        if Instructions_CPT_X.status == STARTED and t >= (instr_duration-2-win.monitorFramePeriod*0.75): #most of one frame period left
+        if Instructions_CPT_X.status == STARTED and frameN >= instr_duration-120:
             Instructions_CPT_X.setAutoDraw(False)
         
         # *Trigger_CPT_X_Instructions* updates
-        if t >= 0.0 and Trigger_CPT_X_Instructions.status == NOT_STARTED:
+        if frameN >= 0.0 and Trigger_CPT_X_Instructions.status == NOT_STARTED:
             # keep track of start time/frame for later
             Trigger_CPT_X_Instructions.tStart = t  # underestimates by a little under one frame
             Trigger_CPT_X_Instructions.frameNStart = frameN  # exact frame index
@@ -679,7 +677,7 @@ for thisEpoch in epoch:
                 else:  triggerButton = eval(triggerButton)
             # keyboard checking is just starting
             Trigger_CPT_X_Instructions.clock.reset()  # now t=0
-        if Trigger_CPT_X_Instructions.status == STARTED and t >= (instr_duration-win.monitorFramePeriod*0.75): #most of one frame period left
+        if Trigger_CPT_X_Instructions.status == STARTED and frameN >= instr_duration:
             Trigger_CPT_X_Instructions.status = STOPPED
         if Trigger_CPT_X_Instructions.status == STARTED:
             theseKeys = event.getKeys(keyList=list(triggerButton))
@@ -693,7 +691,6 @@ for thisEpoch in epoch:
         
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
-            routineTimer.reset()  # if we abort early the non-slip timer needs reset
             break
         continueRoutine = False  # will revert to True if at least one component still running
         for thisComponent in Welcome_CPT_XComponents:
@@ -708,8 +705,6 @@ for thisEpoch in epoch:
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-        else:  # this Routine was not non-slip safe so reset non-slip timer
-            routineTimer.reset()
     
     #-------Ending Routine "Welcome_CPT_X"-------
     for thisComponent in Welcome_CPT_XComponents:
@@ -723,6 +718,8 @@ for thisEpoch in epoch:
     epoch.addData('Trigger_CPT_X_Instructions.keys',Trigger_CPT_X_Instructions.keys)
     if Trigger_CPT_X_Instructions.keys != None:  # we had a response
         epoch.addData('Trigger_CPT_X_Instructions.rt', Trigger_CPT_X_Instructions.rt)
+    # the Routine "Welcome_CPT_X" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
     
     # set up handler to look after randomisation of conditions etc
     CPT_X_Trials = data.TrialHandler(nReps=1, method='sequential', 
@@ -747,7 +744,7 @@ for thisEpoch in epoch:
         t = 0
         CPT_XClock.reset()  # clock 
         frameN = -1
-        routineTimer.add(0.995000)
+        routineTimer.add(1.000000)
         # update component parameters for each repeat
         Letter_CPT_X.setText(CPT_letters)
         Response_CPT_X_X = event.BuilderKeyResponse()  # create an object of type KeyResponse
@@ -773,16 +770,16 @@ for thisEpoch in epoch:
             # update/draw components on each frame
             
             # *Letter_CPT_X* updates
-            if t >= 0 and Letter_CPT_X.status == NOT_STARTED:
+            if frameN >= 0 and Letter_CPT_X.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Letter_CPT_X.tStart = t  # underestimates by a little under one frame
                 Letter_CPT_X.frameNStart = frameN  # exact frame index
                 Letter_CPT_X.setAutoDraw(True)
-            if Letter_CPT_X.status == STARTED and t >= (.095-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Letter_CPT_X.status == STARTED and frameN >= 6:
                 Letter_CPT_X.setAutoDraw(False)
             
             # *Response_CPT_X_X* updates
-            if t >= 0 and Response_CPT_X_X.status == NOT_STARTED:
+            if frameN >= 0 and Response_CPT_X_X.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Response_CPT_X_X.tStart = t  # underestimates by a little under one frame
                 Response_CPT_X_X.frameNStart = frameN  # exact frame index
@@ -790,7 +787,7 @@ for thisEpoch in epoch:
                 # keyboard checking is just starting
                 Response_CPT_X_X.clock.reset()  # now t=0
                 event.clearEvents(eventType='keyboard')
-            if Response_CPT_X_X.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Response_CPT_X_X.status == STARTED and frameN >= 60:
                 Response_CPT_X_X.status = STOPPED
             if Response_CPT_X_X.status == STARTED:
                 theseKeys = event.getKeys(keyList=['1'])
@@ -808,7 +805,7 @@ for thisEpoch in epoch:
                         Response_CPT_X_X.corr = 0
             
             # *Trigger_CPT_X_Stimulus* updates
-            if t >= 0 and Trigger_CPT_X_Stimulus.status == NOT_STARTED:
+            if frameN >= 0 and Trigger_CPT_X_Stimulus.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Trigger_CPT_X_Stimulus.tStart = t  # underestimates by a little under one frame
                 Trigger_CPT_X_Stimulus.frameNStart = frameN  # exact frame index
@@ -825,7 +822,7 @@ for thisEpoch in epoch:
                     else:  triggerButton = eval(triggerButton)
                 # keyboard checking is just starting
                 Trigger_CPT_X_Stimulus.clock.reset()  # now t=0
-            if Trigger_CPT_X_Stimulus.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Trigger_CPT_X_Stimulus.status == STARTED and frameN >= 60:
                 Trigger_CPT_X_Stimulus.status = STOPPED
             if Trigger_CPT_X_Stimulus.status == STARTED:
                 theseKeys = event.getKeys(keyList=list(triggerButton))
@@ -840,7 +837,6 @@ for thisEpoch in epoch:
             
             # check if all components have finished
             if not continueRoutine:  # a component has requested a forced-end of Routine
-                routineTimer.reset()  # if we abort early the non-slip timer needs reset
                 break
             continueRoutine = False  # will revert to True if at least one component still running
             for thisComponent in CPT_XComponents:
@@ -931,25 +927,25 @@ for thisEpoch in epoch:
         # update/draw components on each frame
         
         # *grating_2* updates
-        if t >= 0.0 and grating_2.status == NOT_STARTED:
+        if frameN >= 0.0 and grating_2.status == NOT_STARTED:
             # keep track of start time/frame for later
             grating_2.tStart = t  # underestimates by a little under one frame
             grating_2.frameNStart = frameN  # exact frame index
             grating_2.setAutoDraw(True)
-        if grating_2.status == STARTED and t >= (instr_duration-2-win.monitorFramePeriod*0.75): #most of one frame period left
+        if grating_2.status == STARTED and frameN >= instr_duration-120:
             grating_2.setAutoDraw(False)
         
         # *Instructions_CPT_AX* updates
-        if t >= 0 and Instructions_CPT_AX.status == NOT_STARTED:
+        if frameN >= 0 and Instructions_CPT_AX.status == NOT_STARTED:
             # keep track of start time/frame for later
             Instructions_CPT_AX.tStart = t  # underestimates by a little under one frame
             Instructions_CPT_AX.frameNStart = frameN  # exact frame index
             Instructions_CPT_AX.setAutoDraw(True)
-        if Instructions_CPT_AX.status == STARTED and t >= (instr_duration-2-win.monitorFramePeriod*0.75): #most of one frame period left
+        if Instructions_CPT_AX.status == STARTED and frameN >= instr_duration-120:
             Instructions_CPT_AX.setAutoDraw(False)
         
         # *Trigger_CPT_AX_Instructions* updates
-        if t >= 0 and Trigger_CPT_AX_Instructions.status == NOT_STARTED:
+        if frameN >= 0 and Trigger_CPT_AX_Instructions.status == NOT_STARTED:
             # keep track of start time/frame for later
             Trigger_CPT_AX_Instructions.tStart = t  # underestimates by a little under one frame
             Trigger_CPT_AX_Instructions.frameNStart = frameN  # exact frame index
@@ -966,7 +962,7 @@ for thisEpoch in epoch:
                 else:  triggerButton = eval(triggerButton)
             # keyboard checking is just starting
             Trigger_CPT_AX_Instructions.clock.reset()  # now t=0
-        if Trigger_CPT_AX_Instructions.status == STARTED and t >= (instr_duration-win.monitorFramePeriod*0.75): #most of one frame period left
+        if Trigger_CPT_AX_Instructions.status == STARTED and frameN >= instr_duration:
             Trigger_CPT_AX_Instructions.status = STOPPED
         if Trigger_CPT_AX_Instructions.status == STARTED:
             theseKeys = event.getKeys(keyList=list(triggerButton))
@@ -980,7 +976,6 @@ for thisEpoch in epoch:
         
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
-            routineTimer.reset()  # if we abort early the non-slip timer needs reset
             break
         continueRoutine = False  # will revert to True if at least one component still running
         for thisComponent in Welcome_CPT_AXComponents:
@@ -995,8 +990,6 @@ for thisEpoch in epoch:
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-        else:  # this Routine was not non-slip safe so reset non-slip timer
-            routineTimer.reset()
     
     #-------Ending Routine "Welcome_CPT_AX"-------
     for thisComponent in Welcome_CPT_AXComponents:
@@ -1009,6 +1002,8 @@ for thisEpoch in epoch:
     epoch.addData('Trigger_CPT_AX_Instructions.keys',Trigger_CPT_AX_Instructions.keys)
     if Trigger_CPT_AX_Instructions.keys != None:  # we had a response
         epoch.addData('Trigger_CPT_AX_Instructions.rt', Trigger_CPT_AX_Instructions.rt)
+    # the Routine "Welcome_CPT_AX" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
     
     # set up handler to look after randomisation of conditions etc
     CPT_AX_Trials = data.TrialHandler(nReps=1, method='sequential', 
@@ -1033,7 +1028,7 @@ for thisEpoch in epoch:
         t = 0
         CPT_AXClock.reset()  # clock 
         frameN = -1
-        routineTimer.add(0.995000)
+        routineTimer.add(1.000000)
         # update component parameters for each repeat
         Letter_CPT_AX.setText(CPT_letters)
         Response_CPT_AX_X = event.BuilderKeyResponse()  # create an object of type KeyResponse
@@ -1062,16 +1057,16 @@ for thisEpoch in epoch:
             # update/draw components on each frame
             
             # *Letter_CPT_AX* updates
-            if t >= 0 and Letter_CPT_AX.status == NOT_STARTED:
+            if frameN >= 0 and Letter_CPT_AX.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Letter_CPT_AX.tStart = t  # underestimates by a little under one frame
                 Letter_CPT_AX.frameNStart = frameN  # exact frame index
                 Letter_CPT_AX.setAutoDraw(True)
-            if Letter_CPT_AX.status == STARTED and t >= (.095-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Letter_CPT_AX.status == STARTED and frameN >= 6:
                 Letter_CPT_AX.setAutoDraw(False)
             
             # *Response_CPT_AX_X* updates
-            if t >= 0 and Response_CPT_AX_X.status == NOT_STARTED:
+            if frameN >= 0 and Response_CPT_AX_X.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Response_CPT_AX_X.tStart = t  # underestimates by a little under one frame
                 Response_CPT_AX_X.frameNStart = frameN  # exact frame index
@@ -1079,7 +1074,7 @@ for thisEpoch in epoch:
                 # keyboard checking is just starting
                 Response_CPT_AX_X.clock.reset()  # now t=0
                 event.clearEvents(eventType='keyboard')
-            if Response_CPT_AX_X.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Response_CPT_AX_X.status == STARTED and frameN >= 60:
                 Response_CPT_AX_X.status = STOPPED
             if Response_CPT_AX_X.status == STARTED:
                 theseKeys = event.getKeys(keyList=['1'])
@@ -1097,7 +1092,7 @@ for thisEpoch in epoch:
                         Response_CPT_AX_X.corr = 0
             
             # *Response_CPT_AX_A* updates
-            if t >= 0 and Response_CPT_AX_A.status == NOT_STARTED:
+            if frameN >= 0 and Response_CPT_AX_A.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Response_CPT_AX_A.tStart = t  # underestimates by a little under one frame
                 Response_CPT_AX_A.frameNStart = frameN  # exact frame index
@@ -1105,7 +1100,7 @@ for thisEpoch in epoch:
                 # keyboard checking is just starting
                 Response_CPT_AX_A.clock.reset()  # now t=0
                 event.clearEvents(eventType='keyboard')
-            if Response_CPT_AX_A.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Response_CPT_AX_A.status == STARTED and frameN >= 60:
                 Response_CPT_AX_A.status = STOPPED
             if Response_CPT_AX_A.status == STARTED:
                 theseKeys = event.getKeys(keyList=['1'])
@@ -1118,7 +1113,7 @@ for thisEpoch in epoch:
                     Response_CPT_AX_A.rt = Response_CPT_AX_A.clock.getTime()
             
             # *Trigger_CPT_AX_Stimuls* updates
-            if t >= 0 and Trigger_CPT_AX_Stimuls.status == NOT_STARTED:
+            if frameN >= 0 and Trigger_CPT_AX_Stimuls.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Trigger_CPT_AX_Stimuls.tStart = t  # underestimates by a little under one frame
                 Trigger_CPT_AX_Stimuls.frameNStart = frameN  # exact frame index
@@ -1135,7 +1130,7 @@ for thisEpoch in epoch:
                     else:  triggerButton = eval(triggerButton)
                 # keyboard checking is just starting
                 Trigger_CPT_AX_Stimuls.clock.reset()  # now t=0
-            if Trigger_CPT_AX_Stimuls.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Trigger_CPT_AX_Stimuls.status == STARTED and frameN >= 60:
                 Trigger_CPT_AX_Stimuls.status = STOPPED
             if Trigger_CPT_AX_Stimuls.status == STARTED:
                 theseKeys = event.getKeys(keyList=list(triggerButton))
@@ -1150,7 +1145,6 @@ for thisEpoch in epoch:
             
             # check if all components have finished
             if not continueRoutine:  # a component has requested a forced-end of Routine
-                routineTimer.reset()  # if we abort early the non-slip timer needs reset
                 break
             continueRoutine = False  # will revert to True if at least one component still running
             for thisComponent in CPT_AXComponents:
@@ -1248,18 +1242,18 @@ for thisEpoch in epoch:
         # update/draw components on each frame
         
         # *Nback_Instructions* updates
-        if t >= 0 and Nback_Instructions.status == NOT_STARTED:
+        if frameN >= 0 and Nback_Instructions.status == NOT_STARTED:
             # keep track of start time/frame for later
             Nback_Instructions.tStart = t  # underestimates by a little under one frame
             Nback_Instructions.frameNStart = frameN  # exact frame index
             Nback_Instructions.setAutoDraw(True)
-        if Nback_Instructions.status == STARTED and t >= (instr_duration2-win.monitorFramePeriod*0.75): #most of one frame period left
+        if Nback_Instructions.status == STARTED and frameN >= instr_duration2:
             Nback_Instructions.setAutoDraw(False)
         if Nback_Instructions.status == STARTED:  # only update if being drawn
             Nback_Instructions.setImage(instruction_image, log=False)
         
         # *Trigger_Nback_Instructions* updates
-        if t >= 0 and Trigger_Nback_Instructions.status == NOT_STARTED:
+        if frameN >= 0 and Trigger_Nback_Instructions.status == NOT_STARTED:
             # keep track of start time/frame for later
             Trigger_Nback_Instructions.tStart = t  # underestimates by a little under one frame
             Trigger_Nback_Instructions.frameNStart = frameN  # exact frame index
@@ -1276,7 +1270,7 @@ for thisEpoch in epoch:
                 else:  triggerButton = eval(triggerButton)
             # keyboard checking is just starting
             Trigger_Nback_Instructions.clock.reset()  # now t=0
-        if Trigger_Nback_Instructions.status == STARTED and t >= (instr_duration2-win.monitorFramePeriod*0.75): #most of one frame period left
+        if Trigger_Nback_Instructions.status == STARTED and frameN >= instr_duration2:
             Trigger_Nback_Instructions.status = STOPPED
         if Trigger_Nback_Instructions.status == STARTED:
             theseKeys = event.getKeys(keyList=list(triggerButton))
@@ -1290,7 +1284,6 @@ for thisEpoch in epoch:
         
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
-            routineTimer.reset()  # if we abort early the non-slip timer needs reset
             break
         continueRoutine = False  # will revert to True if at least one component still running
         for thisComponent in Welcome_NbackComponents:
@@ -1305,8 +1298,6 @@ for thisEpoch in epoch:
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-        else:  # this Routine was not non-slip safe so reset non-slip timer
-            routineTimer.reset()
     
     #-------Ending Routine "Welcome_Nback"-------
     for thisComponent in Welcome_NbackComponents:
@@ -1319,6 +1310,8 @@ for thisEpoch in epoch:
     epoch.addData('Trigger_Nback_Instructions.keys',Trigger_Nback_Instructions.keys)
     if Trigger_Nback_Instructions.keys != None:  # we had a response
         epoch.addData('Trigger_Nback_Instructions.rt', Trigger_Nback_Instructions.rt)
+    # the Routine "Welcome_Nback" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
     
     # set up handler to look after randomisation of conditions etc
     Nback_Trials = data.TrialHandler(nReps=1, method='sequential', 
@@ -1343,7 +1336,7 @@ for thisEpoch in epoch:
         t = 0
         Nback_FixationClock.reset()  # clock 
         frameN = -1
-        routineTimer.add(0.995000)
+        routineTimer.add(1.000000)
         # update component parameters for each repeat
         Trigger_Nback_Fixation = event.BuilderKeyResponse()  # create an object of type KeyResponse
         Trigger_Nback_Fixation.status = NOT_STARTED
@@ -1364,16 +1357,16 @@ for thisEpoch in epoch:
             # update/draw components on each frame
             
             # *Fixation_Nback* updates
-            if t >= 0 and Fixation_Nback.status == NOT_STARTED:
+            if frameN >= 0 and Fixation_Nback.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Fixation_Nback.tStart = t  # underestimates by a little under one frame
                 Fixation_Nback.frameNStart = frameN  # exact frame index
                 Fixation_Nback.setAutoDraw(True)
-            if Fixation_Nback.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Fixation_Nback.status == STARTED and frameN >= 60:
                 Fixation_Nback.setAutoDraw(False)
             
             # *Trigger_Nback_Fixation* updates
-            if t >= 0 and Trigger_Nback_Fixation.status == NOT_STARTED:
+            if frameN >= 0 and Trigger_Nback_Fixation.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Trigger_Nback_Fixation.tStart = t  # underestimates by a little under one frame
                 Trigger_Nback_Fixation.frameNStart = frameN  # exact frame index
@@ -1390,7 +1383,7 @@ for thisEpoch in epoch:
                     else:  triggerButton = eval(triggerButton)
                 # keyboard checking is just starting
                 Trigger_Nback_Fixation.clock.reset()  # now t=0
-            if Trigger_Nback_Fixation.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Trigger_Nback_Fixation.status == STARTED and frameN >= 60:
                 Trigger_Nback_Fixation.status = STOPPED
             if Trigger_Nback_Fixation.status == STARTED:
                 theseKeys = event.getKeys(keyList=list(triggerButton))
@@ -1404,7 +1397,6 @@ for thisEpoch in epoch:
             
             # check if all components have finished
             if not continueRoutine:  # a component has requested a forced-end of Routine
-                routineTimer.reset()  # if we abort early the non-slip timer needs reset
                 break
             continueRoutine = False  # will revert to True if at least one component still running
             for thisComponent in Nback_FixationComponents:
@@ -1436,7 +1428,7 @@ for thisEpoch in epoch:
         t = 0
         Nback_StimulusClock.reset()  # clock 
         frameN = -1
-        routineTimer.add(0.995000)
+        routineTimer.add(1.000000)
         # update component parameters for each repeat
         Letter_Nback.setText(letters)
         Response_Nback = event.BuilderKeyResponse()  # create an object of type KeyResponse
@@ -1462,16 +1454,16 @@ for thisEpoch in epoch:
             # update/draw components on each frame
             
             # *Letter_Nback* updates
-            if t >= 0 and Letter_Nback.status == NOT_STARTED:
+            if frameN >= 0 and Letter_Nback.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Letter_Nback.tStart = t  # underestimates by a little under one frame
                 Letter_Nback.frameNStart = frameN  # exact frame index
                 Letter_Nback.setAutoDraw(True)
-            if Letter_Nback.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Letter_Nback.status == STARTED and frameN >= 60:
                 Letter_Nback.setAutoDraw(False)
             
             # *Response_Nback* updates
-            if t >= 0 and Response_Nback.status == NOT_STARTED:
+            if frameN >= 0 and Response_Nback.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Response_Nback.tStart = t  # underestimates by a little under one frame
                 Response_Nback.frameNStart = frameN  # exact frame index
@@ -1479,7 +1471,7 @@ for thisEpoch in epoch:
                 # keyboard checking is just starting
                 Response_Nback.clock.reset()  # now t=0
                 event.clearEvents(eventType='keyboard')
-            if Response_Nback.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Response_Nback.status == STARTED and frameN >= 60:
                 Response_Nback.status = STOPPED
             if Response_Nback.status == STARTED:
                 theseKeys = event.getKeys(keyList=['1'])
@@ -1497,7 +1489,7 @@ for thisEpoch in epoch:
                         Response_Nback.corr = 0
             
             # *Trigger_Nback_Stimulus* updates
-            if t >= 0 and Trigger_Nback_Stimulus.status == NOT_STARTED:
+            if frameN >= 0 and Trigger_Nback_Stimulus.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 Trigger_Nback_Stimulus.tStart = t  # underestimates by a little under one frame
                 Trigger_Nback_Stimulus.frameNStart = frameN  # exact frame index
@@ -1514,7 +1506,7 @@ for thisEpoch in epoch:
                     else:  triggerButton = eval(triggerButton)
                 # keyboard checking is just starting
                 Trigger_Nback_Stimulus.clock.reset()  # now t=0
-            if Trigger_Nback_Stimulus.status == STARTED and t >= (.995-win.monitorFramePeriod*0.75): #most of one frame period left
+            if Trigger_Nback_Stimulus.status == STARTED and frameN >= 60:
                 Trigger_Nback_Stimulus.status = STOPPED
             if Trigger_Nback_Stimulus.status == STARTED:
                 theseKeys = event.getKeys(keyList=list(triggerButton))
@@ -1529,7 +1521,6 @@ for thisEpoch in epoch:
             
             # check if all components have finished
             if not continueRoutine:  # a component has requested a forced-end of Routine
-                routineTimer.reset()  # if we abort early the non-slip timer needs reset
                 break
             continueRoutine = False  # will revert to True if at least one component still running
             for thisComponent in Nback_StimulusComponents:
@@ -1629,17 +1620,16 @@ while continueRoutine:
     # update/draw components on each frame
     
     # *GoodBye* updates
-    if t >= 0.0 and GoodBye.status == NOT_STARTED:
+    if frameN >= 0.0 and GoodBye.status == NOT_STARTED:
         # keep track of start time/frame for later
         GoodBye.tStart = t  # underestimates by a little under one frame
         GoodBye.frameNStart = frameN  # exact frame index
         GoodBye.setAutoDraw(True)
-    if GoodBye.status == STARTED and t >= (instrStopTime-win.monitorFramePeriod*0.75): #most of one frame period left
+    if GoodBye.status == STARTED and frameN >= instrStopTime:
         GoodBye.setAutoDraw(False)
     
     # check if all components have finished
     if not continueRoutine:  # a component has requested a forced-end of Routine
-        routineTimer.reset()  # if we abort early the non-slip timer needs reset
         break
     continueRoutine = False  # will revert to True if at least one component still running
     for thisComponent in EndComponents:
@@ -1654,13 +1644,13 @@ while continueRoutine:
     # refresh the screen
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
-    else:  # this Routine was not non-slip safe so reset non-slip timer
-        routineTimer.reset()
 
 #-------Ending Routine "End"-------
 for thisComponent in EndComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
+# the Routine "End" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
 
 
 CPT_X_responseListTotal = len([elem for elem in CPT_X_responseList if elem == '1'])
